@@ -38,7 +38,7 @@ describe('Testes da Funcionalidade Usuários', () => {
     })
   });
 
-  it('Deve validar um usuário com email inválido', () => {
+  it('Deve validar um usuário com email já em uso', () => {
     const emailRepetido = `ciclano.${Math.floor(Math.random() * 100000)}@qa.com.br`;
 
     cy.request({
@@ -69,60 +69,38 @@ describe('Testes da Funcionalidade Usuários', () => {
   });
 
   it('Deve editar um usuário previamente cadastrado', () => {
-    const emailParaEditar = `usuario.a.editar${Math.floor(Math.random() * 100000)}@qa.com.br`;
+    cy.cadastrarUsuario().then(idUsuario => {
+      
+      const novoNome = `Nome Alterado ${Math.floor(Math.random() * 100000)}`;
+      const novoEmail = `email.alterado${Math.floor(Math.random() * 100000)}@qa.com.br`;
 
-    cy.request({
-        method: 'POST',
-        url: 'usuarios',
-        body: {
-            "nome": "Usuário Para Ser Editado",
-            "email": emailParaEditar,
-            "password": "senha",
-            "administrador": "true"
-        }
-    }).then(response => {
-        const idUsuarioCriado = response.body._id;
-        const novoNome = `Nome Alterado ${Math.floor(Math.random() * 100000)}`;
-
-        cy.request({
-            method: 'PUT',
-            url: `usuarios/${idUsuarioCriado}`,
-            body: {
-                "nome": novoNome,
-                "email": emailParaEditar, 
-                "password": "senha",
-                "administrador": "true"
-            }
-        }).then(response => {
-            expect(response.status).to.equal(200);
-            expect(response.body.message).to.equal('Registro alterado com sucesso');
-        });
+      cy.request({
+          method: 'PUT',
+          url: `usuarios/${idUsuario}`,
+          body: {
+              "nome": novoNome,
+              "email": novoEmail,
+              "password": "senha-nova",
+              "administrador": "false"
+          }
+      }).then(response => {
+          expect(response.status).to.equal(200);
+          expect(response.body.message).to.equal('Registro alterado com sucesso');
+      });
     });
   });
 
   it('Deve deletar um usuário previamente cadastrado', () => {
-
-    cy.request({
-      method: 'POST',
-      url: 'usuarios',
-      body: {
-          "nome": "Usuário Para Deletar",
-          "email": `usuario.a.deletar${Math.floor(Math.random() * 100000)}@qa.com.br`,
-          "password": "senha",
-          "administrador": "true"
-      }
-  }).then(response => {
-      const idUsuarioCriado = response.body._id;
-
+    cy.cadastrarUsuario().then(idUsuario => {
+      
       cy.request({
           method: 'DELETE',
-          url: `usuarios/${idUsuarioCriado}`
+          url: `usuarios/${idUsuario}`
       }).then(response => {
           expect(response.status).to.equal(200);
           expect(response.body.message).to.equal('Registro excluído com sucesso');
       });
-  });
-
+    });
   });
 
 });
