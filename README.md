@@ -1,55 +1,47 @@
-# Testes API - EBAC
-### Exercício para os alunos de Qualidade de software da EBAC 
+# Testes de API com Cypress - ServeRest
 
-## Clonando e executando em sua máquina
+![Cypress](https://img.shields.io/badge/Cypress-API%20testing-17202C?style=for-the-badge&logo=cypress&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-automacao-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Joi](https://img.shields.io/badge/Joi-schema%20validation-0A66C2?style=for-the-badge)
 
-### Pré-requisito:
+Projeto de testes de API com Cypress sobre a ServeRest, com foco em validação de endpoints, organização de comandos e verificação de dados com apoio de schema validation.
 
--Node.js - Você encontra em: https://nodejs.org/en/
+## O que este projeto demonstra
 
--Visual Studio Code ou qualquer editor de texto - você encontra em: https://code.visualstudio.com/download
+| Competência | Aplicação prática |
+| --- | --- |
+| API testing | Requisições automatizadas para validar comportamento de serviço |
+| Cypress além da UI | Uso do framework também na camada de API |
+| Validação de contrato | Dependência `joi` para estruturar validações de schema |
+| Setup local | Script `npm start` para subir a ServeRest localmente |
+| Execução reprodutível | Script `cy:run` para rodar os testes em modo headless |
 
--Git: você encontra em: https://git-scm.com/downloads
+## Como executar
 
-
-Via terminal, rode os seguintes comandos:
-```  
-git clone https://github.com/EBAC-QE/teste-api-ebac.git
+```bash
+git clone https://github.com/DouglasAntoni0/exercicio-api-cypress.git
+cd exercicio-api-cypress
+npm install
 ```
-```
-cd teste-api-ebac
-```
 
-#### Para instalar as dependencias:
-```
-npm install 
-```
+Suba a API local:
 
-#### Para subir o servidor:
-```
+```bash
 npm start
 ```
 
-#### Para executar em moodo Headlesss via console:
+Em outro terminal, execute a suíte:
+
+```bash
+npm run cy:run
 ```
-npx cypress run
+
+Para abrir o Cypress Runner:
+
+```bash
+npx cypress open
 ```
 
-#### Para executar via Dashboard:
-```
-npx cypress open 
-```
-Após abrir o dashboard, prossiga com os passos sugerido pelo Cypress.
+## Resultado técnico
 
-
-### Bibliotecas de apoio:
--Cypress: Framework de automação: https://cypress.io/
-
-
-### Bom exercício ;) 
-Fábio & José Ernesto
-Qualidade de software
-
-
-
-
+O projeto mostra capacidade de testar serviços sem depender da interface. Essa abordagem melhora velocidade de feedback, ajuda a identificar falhas na origem e fortalece uma estratégia de testes em camadas.
