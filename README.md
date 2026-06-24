@@ -98,6 +98,12 @@ A estratégia é validar comportamento diretamente na camada de serviço:
 5. Usar schema validation quando aplicável.
 6. Executar a suíte em modo headless para repetição rápida.
 
+## Critérios de cobertura recomendados
+
+Em uma suíte de API, cobertura não é apenas quantidade de testes. O ponto central é proteger contratos e regras que sustentam a aplicação. Para este projeto, uma evolução natural seria mapear endpoints por recurso, separar cenários positivos e negativos e documentar qual regra cada teste protege.
+
+Uma boa leitura técnica deste repositório é observar a camada que ele representa na pirâmide de testes. Enquanto a UI confirma a jornada integrada, a API confirma a regra com menos custo, menor tempo de execução e diagnóstico mais direto. Isso mostra maturidade na escolha da camada correta para cada tipo de validação.
+
 ## Boas práticas aplicáveis
 
 - Separar testes por recurso da API.
